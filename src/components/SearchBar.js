@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -12,6 +14,10 @@ const SearchBar = ({ onSearch }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSearch(searchTerm);
+  };
+
+  const addBook = () => {
+    navigate("/books/new");
   };
 
   return (
@@ -32,6 +38,13 @@ const SearchBar = ({ onSearch }) => {
       />
 
       <Button variant="contained">Search</Button>
+      <Button
+        variant="contained"
+        sx={{ marginLeft: "10px" }}
+        onClick={() => addBook()}
+      >
+        Add Book
+      </Button>
     </form>
   );
 };

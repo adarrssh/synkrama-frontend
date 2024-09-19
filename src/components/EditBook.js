@@ -47,10 +47,12 @@ const EditBook = () => {
 
   return (
     <>
-    <Container sx={{textAlign:'center', fontSize:'3rem', paddingTop:'10px'}}>
-      Edit Book
-    </Container>
-      <Container style={{ padding: "16px" , marginTop:'20px' }}>
+      <Container
+        sx={{ textAlign: "center", fontSize: "3rem", paddingTop: "10px" }}
+      >
+        Edit Book
+      </Container>
+      <Container style={{ padding: "16px", marginTop: "20px" }}>
         <form
           onSubmit={handleSubmit}
           style={{

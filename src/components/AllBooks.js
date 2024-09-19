@@ -4,22 +4,20 @@ import BookCard from "./BookCard";
 import NavBar from "./NavBar";
 import axios from "axios";
 
-const AllBooks = ({ allBooksDetails , setAllBooksDetails}) => {
-
-
-  useEffect(()=>{
+const AllBooks = ({ allBooksDetails, setAllBooksDetails }) => {
+  useEffect(() => {
     const getAllBooks = async () => {
       try {
-          const res = await axios.get('http://localhost:8000/api/v1/books')
-          setAllBooksDetails(res.data.data)
-          return res
+        const res = await axios.get("http://localhost:8000/api/v1/books");
+        setAllBooksDetails(res.data.data);
+        return res;
       } catch (error) {
-          throw error
+        throw error;
       }
-  }
-  getAllBooks()
-  },[])
-  
+    };
+    getAllBooks();
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -28,7 +26,12 @@ const AllBooks = ({ allBooksDetails , setAllBooksDetails}) => {
         style={{ marginTop: "50px", display: "flex", flexWrap: "wrap" }}
       >
         {allBooksDetails.map((book, key) => (
-          <BookCard key={key} book={book} />
+          <BookCard
+            key={key}
+            book={book}
+            allBooksDetails={allBooksDetails}
+            setAllBooksDetails={setAllBooksDetails}
+          />
         ))}
       </Container>
     </>
