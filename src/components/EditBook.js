@@ -11,7 +11,6 @@ const EditBook = ({loading, setLoading}) => {
   const navigate = useNavigate();
   const { book } = location.state || {};
 
-  // Ensure that the book object exists
 
   const [formData, setFormData] = useState({
     title: book.title,
