@@ -20,8 +20,8 @@ const SearchBar = ({handleDataChange, setAllBooksDetails}) => {
   }
   
 
-  const handleSubmit = () => {
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
     setAllBooksDetails((prevBooks) =>
       prevBooks.filter((book) =>
         book.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -35,7 +35,7 @@ const SearchBar = ({handleDataChange, setAllBooksDetails}) => {
 
   return (
     <form
-      onSubmit={handleSubmit}
+    onSubmit={handleSubmit}
       style={{
         display: "flex",
         justifyContent: "center",
@@ -51,7 +51,7 @@ const SearchBar = ({handleDataChange, setAllBooksDetails}) => {
       />
 
      {searchTerm &&  <Button variant="contained" sx={{marginRight:'10px'}} onClick={()=> resetSearch()}>Clear</Button>}
-      <Button variant="contained" onClick={()=>handleSubmit()}>Search</Button>
+      <Button variant="contained" onClick={handleSubmit}>Search</Button>
       <Button
         variant="contained"
         sx={{ marginLeft: "10px" }}
