@@ -41,7 +41,7 @@ const EditBook = ({loading, setLoading}) => {
     } catch (error) {
       setLoading(false)
       console.error("Failed to update book:", error);
-      alert("Failed to update book");
+      alert('Error:'+ error.response.data.message);
 
     }
   };
