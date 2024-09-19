@@ -8,6 +8,9 @@ const SearchBar = ({handleDataChange, setAllBooksDetails}) => {
   const navigate = useNavigate();
 
   const handleChange = (event) => {
+    if(event.target.value == ''){
+      handleDataChange()
+    }
     setSearchTerm(event.target.value);
   };
 
