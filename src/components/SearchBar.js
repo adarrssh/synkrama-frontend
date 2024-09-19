@@ -15,6 +15,7 @@ const SearchBar = ({handleDataChange, setAllBooksDetails}) => {
     setSearchTerm("")
     handleDataChange()
   }
+  
 
   const handleSubmit = () => {
 
