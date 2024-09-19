@@ -96,6 +96,7 @@ const EditBook = ({loading, setLoading}) => {
             name="year"
             value={formData.year}
             onChange={handleChange}
+            type='number'
             required
           />
           <TextField
