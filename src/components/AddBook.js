@@ -2,8 +2,9 @@ import { Button, Container, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Loader from './Loader';
 
-const AddBook = () => {
+const AddBook = ({loading, setLoading}) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -23,18 +24,24 @@ const AddBook = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       await axios.post(
         `http://localhost:8000/api/v1/book`,
         formData
       );
+      setLoading(false)
       navigate("/");
     } catch (error) {
+      setLoading(false)
       console.error("Failed to add book:", error);
       alert("Failed to add book");
     }
   };
 
+  if(loading){
+    return <Loader/>
+  }
 
   return (
     <>

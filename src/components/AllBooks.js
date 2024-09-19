@@ -3,20 +3,29 @@ import { Box, Container } from "@mui/material";
 import BookCard from "./BookCard";
 import NavBar from "./NavBar";
 import axios from "axios";
+import Loader from "./Loader";
 
-const AllBooks = ({ allBooksDetails, setAllBooksDetails }) => {
+const AllBooks = ({ allBooksDetails, setAllBooksDetails, loading, setLoading }) => {
+
   useEffect(() => {
     const getAllBooks = async () => {
       try {
+        setLoading(true)
         const res = await axios.get("http://localhost:8000/api/v1/books");
         setAllBooksDetails(res.data.data);
-        return res;
+        setLoading(false)
       } catch (error) {
-        throw error;
+        setLoading(false)
+        console.error( error);
+        alert('Error in fetching books')
       }
     };
     getAllBooks();
   }, []);
+
+  if(loading){
+    return <Loader/>
+  }
 
   return (
     <>
@@ -31,6 +40,7 @@ const AllBooks = ({ allBooksDetails, setAllBooksDetails }) => {
             book={book}
             allBooksDetails={allBooksDetails}
             setAllBooksDetails={setAllBooksDetails}
+            setLoading={setLoading}
           />
         ))}
       </Container>

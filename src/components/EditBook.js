@@ -4,8 +4,9 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Container, Typography } from "@mui/material";
+import Loader from "./Loader";
 
-const EditBook = () => {
+const EditBook = ({loading, setLoading}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { book } = location.state || {};
@@ -29,17 +30,27 @@ const EditBook = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       await axios.put(
         `http://localhost:8000/api/v1/book/${book._id}`,
         formData
       );
+      setLoading(false)
       navigate("/");
+
     } catch (error) {
+      setLoading(false)
       console.error("Failed to update book:", error);
       alert("Failed to update book");
+
     }
   };
+
+  if(loading){
+    return <Loader/>
+  }
+
 
   if (!book) {
     return <Container>No book data found</Container>;

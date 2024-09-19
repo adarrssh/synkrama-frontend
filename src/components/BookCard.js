@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import axios from 'axios';
 
-const BookCard = ({ book, allBooksDetails, setAllBooksDetails }) => {
+const BookCard = ({ book, allBooksDetails, setAllBooksDetails, setLoading }) => {
 
   const {_id} = book
   const navigate = useNavigate()
@@ -22,14 +22,16 @@ const BookCard = ({ book, allBooksDetails, setAllBooksDetails }) => {
 
   const deleteBook = async () => {
       try {
+        setLoading(true)
         await axios.delete(
           `http://localhost:8000/api/v1/book/${book._id}`,
         );
         setAllBooksDetails(allBooksDetails.filter((b) => b._id !== _id));
-
+        setLoading(false)
       } catch (error) {
-        console.error("Failed to update book:", error);
-        alert("Failed to update book");
+        setLoading(false)
+        console.error("Failed to delete book:", error);
+        alert("Failed to delete book");
       }
   }
 
