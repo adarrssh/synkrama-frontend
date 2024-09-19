@@ -42,7 +42,7 @@ const BookCard = ({ book, allBooksDetails, setAllBooksDetails, setLoading }) => 
           <InfoIcon onClick={()=>showDetails()}/>
         </div>
         <Typography variant="body2" component="div">
-         title : {book.title}
+         Title : {book.title}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{marginTop:'5px'}}>
           Author: {book.author}

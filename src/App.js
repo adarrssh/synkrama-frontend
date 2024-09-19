@@ -4,14 +4,13 @@ import DetailsBook from "./components/DetailsBook";
 import EditBook from "./components/EditBook";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [allBooksDetails, setAllBooksDetails] = useState([]);
+  
   const [loading, setLoading] = useState(false)
 
-
-  console.log('here')
   return (
     <>
       <Routes>

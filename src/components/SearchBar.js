@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({handleDataChange, setAllBooksDetails}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -11,9 +11,18 @@ const SearchBar = ({ onSearch }) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSearch(searchTerm);
+  const resetSearch  = () => {
+    setSearchTerm("")
+    handleDataChange()
+  }
+
+  const handleSubmit = () => {
+
+    setAllBooksDetails((prevBooks) =>
+      prevBooks.filter((book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
   };
 
   const addBook = () => {
@@ -37,7 +46,8 @@ const SearchBar = ({ onSearch }) => {
         style={{ width: "50%", marginRight: "10px" }}
       />
 
-      <Button variant="contained">Search</Button>
+     {searchTerm &&  <Button variant="contained" sx={{marginRight:'10px'}} onClick={()=> resetSearch()}>Clear</Button>}
+      <Button variant="contained" onClick={()=>handleSubmit()}>Search</Button>
       <Button
         variant="contained"
         sx={{ marginLeft: "10px" }}
