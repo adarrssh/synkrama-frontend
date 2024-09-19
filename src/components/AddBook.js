@@ -35,7 +35,7 @@ const AddBook = ({loading, setLoading}) => {
     } catch (error) {
       setLoading(false)
       console.error("Failed to add book:", error);
-      alert("Failed to add book");
+      alert('Error:'+ error.response.data.message);
     }
   };
 
